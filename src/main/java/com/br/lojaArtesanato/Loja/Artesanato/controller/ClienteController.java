@@ -20,12 +20,12 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/clientes")
+    @GetMapping("/cliente")
     public List<Cliente> getAllCliente(){
         return clienteRepository.findAll();
     }
 
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/cliente/{id}")
     public ResponseEntity<Cliente> getClienteByid(@PathVariable(value = "id") long clienteId)
         throws ResourceNotFoundException{
         Cliente cliente = clienteRepository.findById(clienteId).
@@ -33,7 +33,7 @@ public class ClienteController {
         return ResponseEntity.ok().body(cliente);
     }
 
-    @PostMapping("/clientes")
+    @PostMapping("/cliente")
     public Cliente createCliente(@Valid @RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
@@ -53,7 +53,7 @@ public class ClienteController {
         return ResponseEntity.ok(updateCliente);
     }
 
-    @DeleteMapping("/room{id}")
+    @DeleteMapping("/cliente{id}")
         public Map<String, Boolean> deleteCliente(@PathVariable(value = "id") Long clienteId)
             throws ResourceNotFoundException {
         Cliente cliente = clienteRepository.findById(clienteId)
