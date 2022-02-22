@@ -20,25 +20,25 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/cliente")
+    @GetMapping("/clientes")
     public List<Cliente> getAllCliente(){
         return clienteRepository.findAll();
     }
 
-    @GetMapping("/cliente/{id}")
-    public ResponseEntity<Cliente> getClienteByid(@PathVariable(value = "id") long clienteId)
+    @GetMapping("/clientes/{id}")
+    public ResponseEntity<Cliente> getClienteById(@PathVariable(value = "id") long clienteId)
         throws ResourceNotFoundException{
         Cliente cliente = clienteRepository.findById(clienteId).
             orElseThrow(()-> new ResourceNotFoundException("Cliente não encontrado id::" + clienteId));
         return ResponseEntity.ok().body(cliente);
     }
 
-    @PostMapping("/cliente")
+    @PostMapping("/clientes")
     public Cliente createCliente(@Valid @RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
-    @PutMapping(value = "/cliente/{id}")
+    @PutMapping(value = "/clientes/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") Long clienteId,
                                                 @Valid @RequestBody Cliente clienteDetails) throws ResourceNotFoundException {
         Cliente cliente = clienteRepository.findById((clienteId))
