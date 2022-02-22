@@ -32,4 +32,11 @@ public class ProdutoController {
                 .orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado id:: " + produtoId));
         return ResponseEntity.ok().body(produto);
     }
+
+    @PostMapping("/produtos")
+    public Produto createProduto(@Valid @RequestBody Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+
 }
