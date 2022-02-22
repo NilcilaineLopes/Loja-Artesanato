@@ -7,10 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -42,4 +38,34 @@ public class ClienteController {
         return clienteRepository.save(cliente);
     }
 
+    @PutMapping(value = "/cliente/{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") Long clienteId,
+                                                @Valid @RequestBody Cliente clienteDetails) throws ResourceNotFoundException {
+        Cliente cliente = clienteRepository.findById((clienteId))
+                .orElseThrow(()-> new ResourceNotFoundException("Cliente não encontrado id::" + clienteId));
+        cliente.setNome(clienteDetails.getNome());
+        cliente.setCpf(clienteDetails.getCpf());
+        cliente.setEndereco(clienteDetails.getEndereco());
+        cliente.setEmail(clienteDetails.getEmail());
+        cliente.setLogin(clienteDetails.getLogin());
+        cliente.setSenha(clienteDetails.getSenha());
+        final Cliente updateCliente = clienteRepository.save(cliente);
+        return ResponseEntity.ok(updateCliente);
+    }
+
+    @DeleteMapping("/room{id}")
+        public Map<String, Boolean> deleteCliente(@PathVariable(value = "id") Long clienteId)
+            throws ResourceNotFoundException {
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(()-> new ResourceNotFoundException("Cliente não encontrado id::" + clienteId));
+
+        clienteRepository.delete(cliente);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deletado", Boolean.TRUE);
+
+        return response;
+    }
+
 }
+
+
