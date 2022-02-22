@@ -20,8 +20,16 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @GetMapping("/produto")
+    @GetMapping("/produtos")
     public List<Produto> getAllProduto(){
         return produtoRepository.findAll();
+    }
+
+    @GetMapping("/produtos/{id}")
+    public ResponseEntity<Produto> getProdutoById(@PathVariable(value = "id") long produtoId)
+        throws ResourceNotFoundException{
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado id:: " + produtoId));
+        return ResponseEntity.ok().body(produto);
     }
 }
