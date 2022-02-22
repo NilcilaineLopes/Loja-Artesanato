@@ -1,6 +1,7 @@
 package com.br.lojaArtesanato.Loja.Artesanato.controller;
 
 import com.br.lojaArtesanato.Loja.Artesanato.exception.ResourceNotFoundException;
+import com.br.lojaArtesanato.Loja.Artesanato.model.Cliente;
 import com.br.lojaArtesanato.Loja.Artesanato.model.Produto;
 import com.br.lojaArtesanato.Loja.Artesanato.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,17 @@ public class ProdutoController {
         return produtoRepository.save(produto);
     }
 
+    @PostMapping("/produtos/{id}")
+    public ResponseEntity<Produto> updateProduto(@PathVariable(value = "id") Long produtoId,
+                                                 @Valid @RequestBody Produto produtoDetails) throws ResourceNotFoundException{
+        Produto produto = produtoRepository.findById((produtoId))
+                .orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado id:: " + produtoId));
+        produto.setNome(produtoDetails.getNome());
+        produto.setDescricao(produtoDetails.getDescricao());
+        produto.setQuantidade(produtoDetails.getQuantidade());
+        produto.setPreco(produtoDetails.getPreco());
 
+        final Produto updateProduto = produtoRepository.save(produto);
+        return ResponseEntity.ok(updateProduto);
+    }
 }
