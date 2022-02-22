@@ -52,4 +52,17 @@ public class ProdutoController {
         final Produto updateProduto = produtoRepository.save(produto);
         return ResponseEntity.ok(updateProduto);
     }
+
+    @DeleteMapping("/produto{id}")
+    public Map<String, Boolean> deleteCliente(@PathVariable(value = "id") Long produtoId)
+            throws ResourceNotFoundException {
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado id::" + produtoId));
+
+        produtoRepository.delete(produto);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deletado", Boolean.TRUE);
+
+        return response;
+    }
 }
