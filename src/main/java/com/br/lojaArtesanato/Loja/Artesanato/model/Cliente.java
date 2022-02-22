@@ -42,6 +42,10 @@ public class Cliente {
         this.endereco = endereco;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -72,6 +76,14 @@ public class Cliente {
 
     public String getSenha() {
         return senha;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
     }
 
     @Override
