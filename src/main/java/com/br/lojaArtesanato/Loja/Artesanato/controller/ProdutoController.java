@@ -1,7 +1,6 @@
 package com.br.lojaArtesanato.Loja.Artesanato.controller;
 
 import com.br.lojaArtesanato.Loja.Artesanato.exception.ResourceNotFoundException;
-import com.br.lojaArtesanato.Loja.Artesanato.model.Cliente;
 import com.br.lojaArtesanato.Loja.Artesanato.model.Produto;
 import com.br.lojaArtesanato.Loja.Artesanato.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
