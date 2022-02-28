@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:42000")
@@ -25,6 +23,13 @@ public class VendaController {
         return vendaRepository.findAll();
     }
 
+
+    @PostMapping("/produtos")
+    public Venda createVenda(@Valid @RequestBody Venda venda) {
+        return vendaRepository.save(venda);
+    }
+
+
     @GetMapping("/vendas/{id}")
     public ResponseEntity<Venda> getVendaById(@PathVariable(value = "id") long vendaId)
         throws ResourceNotFoundException{
@@ -33,5 +38,6 @@ public class VendaController {
         return ResponseEntity.ok().body(venda);
 
     }
+
 
 }
