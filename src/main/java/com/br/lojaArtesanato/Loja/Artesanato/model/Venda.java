@@ -45,10 +45,6 @@ public class Venda {
         this.qtd_de_ventas = qtd_de_ventas;
     }
 
-    public Float getValor() {
-        return valor;
-    }
-
     public void setValor(Float valor) {
         this.valor = valor;
     }
@@ -72,6 +68,7 @@ public class Venda {
     public Cliente getCliente() {
         return cliente;
     }
+
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
