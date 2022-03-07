@@ -1,17 +1,29 @@
 package com.br.lojaArtesanato.Loja.Artesanato.model;
 
+import lombok.Builder;
+
 import java.util.Objects;
 
+import javax.persistence.*;
+
+@Entity
+@Builder
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private  String nome;
 
+    @Column(nullable = false)
     private String descricao;
 
+    @Column(nullable = false)
     private Integer quantidade;
 
+    @Column(nullable = false)
     private  Float preco;
 
     public Produto(Long id, String nome, String descricao, Integer quantidade, Float preco) {
