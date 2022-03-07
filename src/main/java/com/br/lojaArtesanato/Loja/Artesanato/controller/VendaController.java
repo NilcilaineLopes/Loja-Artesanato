@@ -1,7 +1,7 @@
 package com.br.lojaArtesanato.Loja.Artesanato.controller;
 
 import com.br.lojaArtesanato.Loja.Artesanato.exception.ResourceNotFoundException;
-import com.br.lojaArtesanato.Loja.Artesanato.model.Venda;
+import com.br.lojaArtesanato.Loja.Artesanato.entity.Venda;
 import com.br.lojaArtesanato.Loja.Artesanato.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:42000")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class VendaController {
-
+/*
     @Autowired
     private VendaRepository vendaRepository;
 
@@ -39,5 +39,5 @@ public class VendaController {
 
     }
 
-
+*/
 }
