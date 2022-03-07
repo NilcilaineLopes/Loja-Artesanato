@@ -1,7 +1,7 @@
 package com.br.lojaArtesanato.Loja.Artesanato.controller;
 
 import com.br.lojaArtesanato.Loja.Artesanato.exception.ResourceNotFoundException;
-import com.br.lojaArtesanato.Loja.Artesanato.model.Produto;
+import com.br.lojaArtesanato.Loja.Artesanato.entity.Produto;
 import com.br.lojaArtesanato.Loja.Artesanato.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +13,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:42000")
-@RequestMapping("/api/v1")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/")
 public class ProdutoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @GetMapping("/produtos")
+    @GetMapping("/produto")
     public List<Produto> getAllProduto(){
         return produtoRepository.findAll();
     }
 
-    @GetMapping("/produtos/{id}")
+    @GetMapping("/produto/{id}")
     public ResponseEntity<Produto> getProdutoById(@PathVariable(value = "id") long produtoId)
         throws ResourceNotFoundException{
         Produto produto = produtoRepository.findById(produtoId)
@@ -33,12 +33,12 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produto);
     }
 
-    @PostMapping("/produtos")
+    @PostMapping("/produto")
     public Produto createProduto(@Valid @RequestBody Produto produto) {
         return produtoRepository.save(produto);
     }
 
-    @PostMapping("/produtos/{id}")
+    @PostMapping("/produto/{id}")
     public ResponseEntity<Produto> updateProduto(@PathVariable(value = "id") Long produtoId,
                                                  @Valid @RequestBody Produto produtoDetails) throws ResourceNotFoundException{
         Produto produto = produtoRepository.findById((produtoId))
@@ -52,7 +52,7 @@ public class ProdutoController {
         return ResponseEntity.ok(updateProduto);
     }
 
-    @DeleteMapping("/produto{id}")
+    @DeleteMapping("/produto/{id}")
     public Map<String, Boolean> deleteCliente(@PathVariable(value = "id") Long produtoId)
             throws ResourceNotFoundException {
         Produto produto = produtoRepository.findById(produtoId)
