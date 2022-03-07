@@ -1,6 +1,6 @@
 package com.br.lojaArtesanato.Loja.Artesanato.repository;
 
-import com.br.lojaArtesanato.Loja.Artesanato.model.Cliente;
+import com.br.lojaArtesanato.Loja.Artesanato.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
