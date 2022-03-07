@@ -1,16 +1,14 @@
-package com.br.lojaArtesanato.Loja.Artesanato.model;
+package com.br.lojaArtesanato.Loja.Artesanato.entity;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Objects;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-
+@Data
 @Builder
+//@Table(name = "pessoas")
 public class Cliente {
 
     @Id
@@ -23,8 +21,8 @@ public class Cliente {
     @Column(nullable = false)
     private String cpf;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
-    private List<Endereco> enderecos;
+    @Column(nullable = false)
+    private String endereco;
 
     @Column(nullable = false)
     private String email;
@@ -35,10 +33,11 @@ public class Cliente {
     @Column(nullable = false)
     private String senha;
 
-    public Cliente(String nome, String cpf, Endereco enderecos, String email, String login, String senha) {
+    public Cliente(Long id, String nome, String cpf, String endereco, String email, String login, String senha) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.enderecos = (List<Endereco>) enderecos;
+        this.endereco = endereco;
         this.email = email;
         this.login = login;
         this.senha = senha;
@@ -47,55 +46,59 @@ public class Cliente {
     public Cliente() {
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEndereco(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getNome() {
         return nome;
     }
 
-    public  String getCpf() {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
         return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getLogin() {
         return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public Long getId() {
-        return id;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
